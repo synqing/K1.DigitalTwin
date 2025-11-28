@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "K1 Environment Scene Manifest",
+  "type": "object",
+  "required": ["env_name", "reference_image", "objects"],
+  "properties": {
+    "env_name": {
+      "type": "string",
+      "description": "Environment identifier, e.g. battlestation_batman"
+    },
+    "reference_image": {
+      "type": "string",
+      "description": "Path to the processed reference image"
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "mesh_path"],
+        "properties": {
+          "name": { "type": "string" },
+          "mesh_path": { "type": "string" },
+          "mask_path": { "type": "string" },
+          "location": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation_euler": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "scale": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          }
+        }
+      }
+    },
+    "notes": { "type": "string" }
+  }
+}

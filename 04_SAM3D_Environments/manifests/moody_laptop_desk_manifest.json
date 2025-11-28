@@ -1,0 +1,107 @@
+{
+  "env_name": "moody_laptop_desk",
+  "reference_image": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/reference/processed/moody_laptop_desk.jpg",
+  "objects": [
+    {
+      "name": "laptop",
+      "mesh_path": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/meshes/moody_laptop_desk/laptop.obj",
+      "mask_path": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/masks/moody_laptop_desk/laptop.png",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "desk_surface",
+      "mesh_path": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/meshes/moody_laptop_desk/desk_surface.obj",
+      "mask_path": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/masks/moody_laptop_desk/desk_surface.png",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "lamp",
+      "mesh_path": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/meshes/moody_laptop_desk/lamp.obj",
+      "mask_path": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/masks/moody_laptop_desk/lamp.png",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "mug",
+      "mesh_path": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/meshes/moody_laptop_desk/mug.obj",
+      "mask_path": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/masks/moody_laptop_desk/mug.png",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "background",
+      "mesh_path": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/meshes/moody_laptop_desk/background.obj",
+      "mask_path": "/Users/spectrasynq/K1-Lightwave_Digital-Twin/04_SAM3D_Environments/assets/masks/moody_laptop_desk/background.png",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "notes": "STUB: Placeholder meshes. Install TripoSR or Shap-E for real reconstruction."
+}

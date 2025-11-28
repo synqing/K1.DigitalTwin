@@ -1,0 +1,20 @@
+# OS
+.DS_Store
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.venv/
+04_SAM3D_Environments/.venv/
+
+# Local tooling caches
+.claude/
+.env
+.env.*
+*.log
+
+# Large external artifacts
+04_SAM3D_Environments/external/sam-3d-objects/checkpoints/
