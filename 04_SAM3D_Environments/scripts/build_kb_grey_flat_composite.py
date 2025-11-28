@@ -228,16 +228,52 @@ def setup_compositor_background(img_path: Path):
         nodes.remove(n)
     rl = nodes.new('CompositorNodeRLayers')
     comp = nodes.new('CompositorNodeComposite')
-    img_node = nodes.new('CompositorNodeImage')
-    img_node.image = bpy.data.images.get(img_path.name) or bpy.data.images.load(str(img_path))
+    bg_img = nodes.new('CompositorNodeImage')
+    bg_img.image = bpy.data.images.get(img_path.name) or bpy.data.images.load(str(img_path))
+    mask_keyboard = nodes.new('CompositorNodeImage')
+    mask_control = nodes.new('CompositorNodeImage')
+    mk_path = project_root() / 'assets' / 'masks' / 'kb_grey_flat' / 'keyboard.png'
+    mc_path = project_root() / 'assets' / 'masks' / 'kb_grey_flat' / 'control_panel.png'
+    mk_img = bpy.data.images.get(mk_path.name) or (bpy.data.images.load(str(mk_path)) if mk_path.exists() else None)
+    mc_img = bpy.data.images.get(mc_path.name) or (bpy.data.images.load(str(mc_path)) if mc_path.exists() else None)
+    if mk_img:
+        mk_img.colorspace_settings.name = 'Non-Color'
+        mask_keyboard.image = mk_img
+    if mc_img:
+        mc_img.colorspace_settings.name = 'Non-Color'
+        mask_control.image = mc_img
+    mix_max = nodes.new('CompositorNodeMath')
+    mix_max.operation = 'MAXIMUM'
+    invert = nodes.new('CompositorNodeInvert')
+    dilate = nodes.new('CompositorNodeDilateErode')
+    dilate.mode = 'STEP'
+    dilate.distance = 2
+    set_alpha = nodes.new('CompositorNodeSetAlpha')
     alpha_over = nodes.new('CompositorNodeAlphaOver')
     alpha_over.inputs[0].default_value = 1.0
-    rl.location = (-400, 0)
-    img_node.location = (-400, -200)
+    rl.location = (-600, 0)
+    bg_img.location = (-600, -200)
+    mask_keyboard.location = (-900, -200)
+    mask_control.location = (-900, -350)
+    mix_max.location = (-750, -260)
+    invert.location = (-600, -300)
+    dilate.location = (-450, -300)
+    set_alpha.location = (-300, -150)
     alpha_over.location = (-100, -100)
     comp.location = (200, -100)
+    if mk_img and mc_img:
+        links.new(mask_keyboard.outputs['Image'], mix_max.inputs[0])
+        links.new(mask_control.outputs['Image'], mix_max.inputs[1])
+        links.new(mix_max.outputs['Value'], invert.inputs['Color'])
+    elif mk_img:
+        links.new(mask_keyboard.outputs['Image'], invert.inputs['Color'])
+    elif mc_img:
+        links.new(mask_control.outputs['Image'], invert.inputs['Color'])
+    links.new(invert.outputs['Color'], dilate.inputs['Mask'])
+    links.new(bg_img.outputs['Image'], set_alpha.inputs['Image'])
+    links.new(dilate.outputs['Mask'], set_alpha.inputs['Alpha'])
+    links.new(set_alpha.outputs['Image'], alpha_over.inputs[2])
     links.new(rl.outputs['Image'], alpha_over.inputs[1])
-    links.new(img_node.outputs['Image'], alpha_over.inputs[2])
     links.new(alpha_over.outputs['Image'], comp.inputs['Image'])
 
 
@@ -305,6 +341,8 @@ def create_occluder(name: str, ref_img: bpy.types.Image, mask_img: bpy.types.Ima
         obj.data.materials.append(mat)
     else:
         obj.data.materials[0] = mat
+    obj.hide_viewport = True
+    obj.hide_render = True
     return obj
 
 
